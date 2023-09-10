@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .tooltip-target {
+        @apply w-fit dark:text-white;
+    }
+
+    .tooltip-base {
+        @apply z-10 w-fit rounded-xl divide-y divide-gray-100 shadow;
+    }
+
+    .tooltip-style-auto {
+        @apply border border-gray-200 bg-white text-gray-900 dark:border-none dark:bg-gray-700 dark:text-white;
+    }
+
+    .tooltip-hidden {
+        @apply invisible opacity-0;
+    }
+
+    .tooltip-animation {
+        @apply transition-opacity;
+    }
+
+    .tooltip-content {
+        @apply rounded-xl text-sm text-gray-700 dark:text-gray-200;
+    }
+
+    .sidebar-root-base {
+        @apply flex fixed top-0 left-0 z-20 flex-col flex-shrink-0 pt-16 h-full duration-75 border-r border-gray-200 lg:flex transition-width dark:border-gray-700 ;
+    }
+
+    .sidebar-root-inner {
+        @apply h-full overflow-y-auto overflow-x-hidden rounded bg-white py-4 px-3 dark:bg-gray-800;
+    }
+}
