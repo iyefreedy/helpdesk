@@ -16,6 +16,7 @@ import {
 
 import { HiBell, HiChartPie, HiMenuAlt1, HiSearch } from "react-icons/hi";
 import useWindowDimension from "@/hooks/useWindowDimension";
+import { Link } from "@inertiajs/react";
 
 export default function Authenticated({
     user,
@@ -205,7 +206,11 @@ export default function Authenticated({
                                 </form>
                                 <Sidebar.Items>
                                     <Sidebar.ItemGroup>
-                                        <Sidebar.Item icon={HiChartPie}>
+                                        <Sidebar.Item
+                                            as={Link}
+                                            href={route("dashboard")}
+                                            icon={HiChartPie}
+                                        >
                                             Dashboard
                                         </Sidebar.Item>
                                     </Sidebar.ItemGroup>

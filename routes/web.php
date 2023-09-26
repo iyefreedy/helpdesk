@@ -2,8 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +41,23 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::get('/auth/callback', function (Request $request) {
+
+    $user = Socialite::driver('laravelpassport')->user();
+    $user = User::updateOrCreate([
+        'passport_id' => $user->id,
+    ], [
+        'name' => $user->name,
+        'email' => $user->email,
+        'passport_access_token' => $user->token,
+        'passport_refresh_token' => $user->refreshToken,
+    ]);
+
+
+    Auth::login($user);
+    Cookie::make('access_token', $user->access_token);
+
+    return redirect('/');
+});
+
+require __DIR__ . '/auth.php';

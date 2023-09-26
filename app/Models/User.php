@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'passport_id',
+        'passport_access_token',  // Add this column here
+        'passport_refresh_token', // Add this column here
     ];
 
     /**
